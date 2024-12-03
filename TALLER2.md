@@ -45,7 +45,7 @@ GRANT SELECT ON tienda_online.* TO 'supervisor_tienda'@'localhost';
     ('Tecnologia', 'Mouse', 25, 15);
   ```
 
-RESULTADO: _1 rows affected_
+**RESULTADO:** _1 rows affected_
 
 - Consultar tabla con el usuario `supervisor_tienda`
 
@@ -53,7 +53,7 @@ RESULTADO: _1 rows affected_
   SELECT * from productos
   ```
 
-RESULTADO: No hay errores y se muestran los datos
+**RESULTADO:** No hay errores y se muestran los datos
 
 - Intentar acciones no permitidas con cada uno
 
@@ -67,15 +67,13 @@ RESULTADO: No hay errores y se muestran los datos
 
   - Insertar registro con `supervisor_tienda`
 
-        ```sql
-        INSERT INTO
-          `productos` (`categoria`, `nombre`, `precio`, `stock`)
-        VALUES ('Tecnologia', 'Pc', 1000, 2)
-        ```
-
-        **OUTPUT:** `DELETE command denied to user 'empleado_tienda'@'localhost' for table 'productos'
-
-    `
+    ```sql
+    INSERT INTO
+    productos` (`categoria`, `nombre`, `precio`, `stock`)
+    VALUES ('Tecnologia', 'Pc', 1000, 2)
+    ```
+    
+    **OUTPUT:** `DELETE command denied to user 'empleado_tienda'@'localhost' for table 'productos'
 
 ## Preguntas
 
