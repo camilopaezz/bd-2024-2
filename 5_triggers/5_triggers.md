@@ -148,3 +148,50 @@ begin
     end if;
 end;
 ```
+
+## Preguntas
+
+- ¿Que sucede si intentas vender mas productos de los que hay en stock?
+  R// Por la implementacion de la funcion `validar_stock` se enviara un mensaje 'Stock insuficiente para realizar la venta' y se lanzara una señal de error 45000 que no permitira que la operacion se realize protegiendo la base de datos
+
+- Como modificarias la funcion `calcular_total` para incluir un descuento del 10% en productos cuyo precio sea mayor a 500?
+  R//
+  
+```sql
+create function calcular_total(precio float(2), cantidad int)
+returns FLOAT(2) deterministic
+begin
+  declare total FLOAT(2);
+  set total = precio * cantidad;
+
+  if total > 500 then
+    return total * 0.9;
+  else
+    return  total
+end;
+```
+
+- Que otras validaciones podrias agregar al trigger `validar_stock`?
+  R// Las cantidad en la tabla venta es un entero firmado, por lo que podria llegar a ser ser negativo si alguien manipula el valor, esto se corrige dejandolo sin firmar desde la definicion de la tabla, o en este caso agregandola al trigger quedaria asi:
+
+```sql
+create trigger validar_stock
+before insert on Ventas
+for each row
+begin
+    declare current_stock INT;
+    
+    select stock into current_stock 
+    from Productos 
+    where producto_id = NEW.producto_id;
+
+    if NEW.cantidad <= 0 then
+        signal sqlstate '45000'
+        set message_text = 'Cantidad no puede ser negativa o 0';
+    if current_stock < NEW.cantidad then
+        signal sqlstate '45000'
+        set message_text = 'Stock insuficiente para realizar la venta';
+    end if;
+end;
+```
+  
