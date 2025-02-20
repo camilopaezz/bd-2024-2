@@ -1,4 +1,8 @@
-q# Taller 6 - Indices
+# Taller 6 - Indices
+
+- Camilo Esteban Paez Neuta
+- cc. 1110450891
+- cpaezn@unal.edu.co
 
 ## 1. Creacion de la base de datos
 
@@ -16,7 +20,7 @@ CREATE TABLE estudiantes (
 
 ## 2. Insercion de datos
 
-Usando faker y un script hecho en go, insertamos los datos, si desea ver el codigo, esta diponible [aquí]().
+Usando faker y un script hecho en go, insertamos los datos, si desea ver el codigo, esta diponible [aquí](https://github.com/camilopaezz/bd-2024-2/blob/main/scripts/insert6.go).
 
 ## 3. Consultas sin indices
 
@@ -82,4 +86,8 @@ SELECT * FROM estudiantes WHERE nombre = 'Rosemary';
 
 ## Reflexiones
 
-- 
+- Se observa una mejora significativa cuando los datos discriminantes son los suficiente dispersos y diferentes entre llaves primaria, ya que ordena los datos y acceder y filtar se hace menos complejo.
+
+- No es tan util en consultas de rangos y ordenacion debido al funcionamiento de la funcion hash que no mantiene ningun orden.
+
+- El crear un indice en una tabla implica mantener una estructura de datos, que tiene que ser rebalanceada cada insercion, los indices deben unicamente existir de acuerdo a como se consulta la base de datos.
