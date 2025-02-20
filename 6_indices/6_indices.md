@@ -1,4 +1,4 @@
-# Taller 6 - Indices
+q# Taller 6 - Indices
 
 ## 1. Creacion de la base de datos
 
@@ -71,9 +71,15 @@ SELECT * FROM estudiantes ORDER BY promedio DESC;
 // Sin indices: 0.00147375, Con indices: 0.000874, diferencia: -40.69%
 ```
 
-- Es muy problable que al buscar a "Juan" si no existe tenga que recorrer gran parte del arbol en el peor de los casos, por eso no vemos una diferencia sustancial. Mientras que si buscamos "Rosemary esta diferencia si se nota"
+- Es muy problable que al buscar a "Juan" si no existe tenga que recorrer gran parte del arbol en el peor de los casos, por eso no vemos una diferencia sustancial. Mientras que si buscamos "Rosemary esta diferencia si es notable"
 
 ```sql
 SELECT * FROM estudiantes WHERE nombre = 'Rosemary';
 // Sin indices: 0.00033475, Con indices: 0.0002515, diferencia: -24.86%
 ```
+
+- Las limitaciones de las tablas hash es clara, para que sean usadas la información debe estar en memoria, en tablas con millones de filas se hace inviable, es esta la razón por la que las bases de datos en memoria como redis se usen en casos donde la velocidad de procesamiento es mas critica que la conservación de la información que se puede ir  eliminando o escribiéndola en disco después de cierto tiempo.
+
+## Reflexiones
+
+- 
